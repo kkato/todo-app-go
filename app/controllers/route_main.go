@@ -3,7 +3,8 @@ package controllers
 import (
 	"log"
 	"net/http"
-	"todo-app/app/models"
+
+	"github.com/kkato/todo-app/app/models"
 )
 
 func top(w http.ResponseWriter, r *http.Request) {

@@ -3,7 +3,8 @@ package controllers
 import (
 	"log"
 	"net/http"
-	"todo-app/app/models"
+
+	"github.com/kkato/todo-app/app/models"
 )
 
 func signup(w http.ResponseWriter, r *http.Request) {

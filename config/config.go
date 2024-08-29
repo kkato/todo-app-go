@@ -2,7 +2,8 @@ package config
 
 import (
 	"log"
-	"todo-app/utils"
+
+	"github.com/kkato/todo-app/utils"
 
 	"gopkg.in/go-ini/ini.v1"
 )

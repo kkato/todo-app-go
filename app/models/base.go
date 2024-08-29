@@ -6,7 +6,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"todo-app/config"
+
+	"github.com/kkato/todo-app/config"
 
 	"github.com/google/uuid"
 	"github.com/lib/pq"

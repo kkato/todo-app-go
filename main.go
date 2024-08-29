@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"todo-app/app/controllers"
-	"todo-app/app/models"
+
+	"github.com/kkato/todo-app/app/controllers"
+	"github.com/kkato/todo-app/app/models"
 )
 
 func main() {

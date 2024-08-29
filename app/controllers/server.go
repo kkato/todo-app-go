@@ -6,8 +6,9 @@ import (
 	"regexp"
 	"strconv"
 	"text/template"
-	"todo-app/app/models"
-	"todo-app/config"
+
+	"github.com/kkato/todo-app/app/models"
+	"github.com/kkato/todo-app/config"
 )
 
 func generateHTML(w http.ResponseWriter, data interface{}, filenames ...string) {
