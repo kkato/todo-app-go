@@ -17,55 +17,56 @@ var Db *sql.DB
 
 var err error
 
-/*
 const (
 	tableNameUser    = "users"
 	tableNameTodo    = "todos"
 	tableNameSession = "sessions"
 )
-*/
 
 func init() {
-	url := os.Getenv("RDS_URL")
+	url := os.Getenv("DATABASE_URL")
 	connection, _ := pq.ParseURL(url)
-	connection += "sslmode=require"
+	connection += "sslmode=disable"
 	Db, err = sql.Open(config.Config.SQLDriver, connection)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	/*
-		Db, err = sql.Open(config.Config.SQLDriver, config.Config.DbName)
-		if err != nil {
-			log.Fatalln(err)
-		}
 
-		cmdU := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			uuid STRING NOT NULL UNIQUE,
-			name STRING,
-			email STRING,
-			password STRING,
-			created_at DATETIME)`, tableNameUser)
+	cmdU := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
+		id SERIAL PRIMARY KEY,
+		uuid UUID NOT NULL UNIQUE,
+		name TEXT,
+		email TEXT,
+		password TEXT,
+		created_at TIMESTAMP)`, tableNameUser)
 
-		Db.Exec(cmdU)
+	_, err = Db.Exec(cmdU)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
-		cmdT := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
-				id INTEGER PRIMARY KEY AUTOINCREMENT,
-				content TEXT,
-				user_id INTEGER,
-				created_at DATETIME)`, tableNameTodo)
-
-		Db.Exec(cmdT)
-
-		cmdS := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			uuid STRING NOT NULL UNIQUE,
-			email STRING,
+	cmdT := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
+			id SERIAL PRIMARY KEY,
+			content TEXT,
 			user_id INTEGER,
-			created_at DATETIME)`, tableNameSession)
+			created_at TIMESTAMP)`, tableNameTodo)
 
-		Db.Exec(cmdS)
-	*/
+	_, err = Db.Exec(cmdT)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	cmdS := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
+		id SERIAL PRIMARY KEY,
+		uuid UUID NOT NULL UNIQUE,
+		email TEXT,
+		user_id INTEGER,
+		created_at TIMESTAMP)`, tableNameSession)
+
+	_, err = Db.Exec(cmdS)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
 
 func createUUID() (uuidobj uuid.UUID) {
