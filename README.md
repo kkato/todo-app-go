@@ -1,6 +1,6 @@
 # TODOアプリケーション
 
-Udemyコース【Go入門】Golang基礎入門 + 各種ライブラリ + 簡単なTodoWebアプリケーション開発(Go言語)の一環として作成したシンプルなTODOアプリケーションです。詳しくは、[こちらのコースページ](https://www.udemy.com/course/golang-webgosql)をご覧ください。
+Udemyコース【Go入門】Golang基礎入門 + 各種ライブラリ + 簡単なTodoWebアプリケーション開発(Go言語)の一環として作成したシンプルなTODOアプリケーションです。詳しくは[こちらのコースページ](https://www.udemy.com/course/golang-webgosql)をご覧ください。
 
 ## 機能
 
