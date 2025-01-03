@@ -5,6 +5,10 @@ on:
     branches:
       - main  # 例: mainブランチにpushされたら実行
 
+permissions:
+  contents: read          # 必要に応じて変更
+  packages: write         # GHCRにイメージをPushする権限
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
