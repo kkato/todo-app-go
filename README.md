@@ -1,4 +1,4 @@
-# go-todo-app
+# todo-app-go
 
 This is a simple TODO application created as part of the Udemy course【Go入門】Golang基礎入門 + 各種ライブラリ + 簡単なTodoWebアプリケーション開発(Go言語). For more details, please refer to the [course page](https://www.udemy.com/course/golang-webgosql).
 
