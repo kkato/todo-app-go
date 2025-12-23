@@ -1,37 +1,37 @@
 # todo-app-go
 
-This is a simple TODO application created as part of the Udemy course【Go入門】Golang基礎入門 + 各種ライブラリ + 簡単なTodoWebアプリケーション開発(Go言語). For more details, please refer to the [course page](https://www.udemy.com/course/golang-webgosql).
+Udemyコース【Go入門】Golang基礎入門 + 各種ライブラリ + 簡単なTodoWebアプリケーション開発(Go言語)の一部として作成したシンプルなTODOアプリケーションです。詳細については、[コースページ](https://www.udemy.com/course/golang-webgosql)を参照してください。
 
-## Features
+## 機能
 
-- Add, view, and delete tasks
-- Login functionality
-- Uses standard Go libraries
+- タスクの追加、表示、削除
+- ログイン機能
+- Go標準ライブラリを使用
 
-## How to Use
+## 使い方
 
-1. Clone the repository:
+1. リポジトリをクローン:
     ```bash
     git clone https://github.com/kkato/todo_app.git
     cd todo_app
     ```
 
-2. Install dependencies:
+2. 依存関係をインストール:
     ```bash
     go mod tidy
     ```
 
-3. Run the application:
+3. アプリケーションを実行:
     ```bash
     go run main.go
     ```
 
-4. Access the following URL in your browser:
+4. ブラウザで以下のURLにアクセス:
     ```
     http://localhost:8080
     ```
 
-## Libraries Used
+## 使用ライブラリ
 
-- **net/http**: Used to create the web server
-- Other standard Go libraries
+- **net/http**: Webサーバーの作成に使用
+- その他のGo標準ライブラリ
