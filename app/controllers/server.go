@@ -3,8 +3,6 @@ package controllers
 import (
 	"fmt"
 	"net/http"
-	"regexp"
-	"strconv"
 	"text/template"
 
 	"github.com/kkato/todo-app/app/models"
@@ -32,41 +30,24 @@ func session(w http.ResponseWriter, r *http.Request) (sess models.Session, err e
 	return sess, err
 }
 
-var validPath = regexp.MustCompile("^/todos/(edit|update|delete)/([0-9]+)")
-
-func parseURL(fn func(http.ResponseWriter, *http.Request, int)) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		// /todos/edit/1
-		q := validPath.FindStringSubmatch(r.URL.Path)
-		if q == nil {
-			http.NotFound(w, r)
-			return
-		}
-		qi, err := strconv.Atoi(q[2])
-		if err != nil {
-			http.NotFound(w, r)
-			return
-		}
-
-		fn(w, r, qi)
-	}
-}
-
 func StartMainServer() error {
 	files := http.FileServer(http.Dir(config.Config.Static))
-	http.Handle("/static/", http.StripPrefix("/static/", files))
 
-	http.HandleFunc("/", top)
-	http.HandleFunc("/signup", signup)
-	http.HandleFunc("/login", login)
-	http.HandleFunc("/authenticate", authenticate)
-	http.HandleFunc("/logout", logout)
-	http.HandleFunc("/todos", index)
-	http.HandleFunc("/todos/new", todoNew)
-	http.HandleFunc("/todos/save", todoSave)
-	http.HandleFunc("/todos/edit/", parseURL(todoEdit))
-	http.HandleFunc("/todos/update/", parseURL(todoUpdate))
-	http.HandleFunc("/todos/delete/", parseURL(todoDelete))
+	mux := http.NewServeMux()
+	mux.Handle("/static/", http.StripPrefix("/static/", files))
 
-	return http.ListenAndServe(":"+config.Config.Port, nil)
+	mux.HandleFunc("GET /{$}", top)
+	mux.HandleFunc("GET /signup", signupNew)
+	mux.HandleFunc("POST /signup", signupCreate)
+	mux.HandleFunc("GET /login", login)
+	mux.HandleFunc("POST /authenticate", authenticate)
+	mux.HandleFunc("GET /logout", logout)
+	mux.HandleFunc("GET /todos", index)
+	mux.HandleFunc("GET /todos/new", todoNew)
+	mux.HandleFunc("POST /todos/save", todoSave)
+	mux.HandleFunc("GET /todos/edit/{id}", todoEdit)
+	mux.HandleFunc("POST /todos/update/{id}", todoUpdate)
+	mux.HandleFunc("GET /todos/delete/{id}", todoDelete)
+
+	return http.ListenAndServe(":"+config.Config.Port, mux)
 }
